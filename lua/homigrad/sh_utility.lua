@@ -2317,7 +2317,7 @@ local IsValid = IsValid
 		["lunasflightschool_ah6"] = {multi = 20, AmmoType = "14.5x114mm BZTM"},
 		["npc_turret_floor"] = {multi = 1.25, AmmoType = "9x19 mm Parabellum"},
 		["npc_sniper"] = {multi = 3, AmmoType = "14.5x114mm BZTM", PenetrationMul = 4},
-		["npc_hunter"] = {multi = 4, AmmoType = "12/70 RIP", PenetrationMul = 1}, --;; не работает(
+		["npc_hunter"] = {multi = 4, AmmoType = "12/70 RIP", PenetrationMul = 1}, --;; не работает( потому что прожектайлами стреляет
 		["npc_turret_ceiling"] = {multi = 1.25, AmmoType = "9x19 mm QuakeMaker"},
 	}
 
@@ -2622,8 +2622,9 @@ duplicator.Allow( "homigrad_base" )
 	end)
 --//
 
---\\ Shared coldmaps
-hg.ColdMaps = {
+
+--\\ Shared maps with temperatures
+hg.TemperatureMaps = {
 	["gm_wintertown"] = true,
 	["cs_drugbust_winter"] = true,
 	["cs_office"] = true,
@@ -2637,7 +2638,8 @@ hg.ColdMaps = {
 	["mu_riverside_snow"] = true,
 	["gm_fork_north"] = true,
 	["gm_fork_north_day"] = true,
-	["gm_ijm_boreas"] = true
+	["gm_ijm_boreas"] = true,
+	["gm_construct"] = true, -- test
 }
 --//
 
