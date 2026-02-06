@@ -883,14 +883,14 @@ function SWEP:ApplyForce()
 				if not ply2.noHead and ply2.organism then
 
 					if ply2.organism.CantCheckPulse then
-						--ply:ChatPrint("The armor is too thick to feel the pulse.")
+						ply:ChatPrint("The armor is too thick to feel the pulse.")
 					elseif ((bone == "ValveBiped.Bip01_L_Hand") or (bone == "ValveBiped.Bip01_R_Hand") or (bone == "ValveBiped.Bip01_Head1")) then
 						local org = ply2.organism
 
 						if org.heartstop then
-							--ply:ChatPrint("No pulse.")
+							ply:ChatPrint("No pulse.")
 						else
-							--ply:ChatPrint(org.pulse < 20 and "Barely can feel the pulse." or (org.pulse <= 50 and "Low pulse.") or (org.pulse <= 90 and "Normal pulse.") or "High pulse.")
+							ply:ChatPrint(org.pulse < 20 and "Barely can feel the pulse." or (org.pulse <= 50 and "Low pulse.") or (org.pulse <= 90 and "Normal pulse.") or "High pulse.")
 						end
 
 						if (org.last_heartbeat + 60) > CurTime() then
@@ -899,12 +899,12 @@ function SWEP:ApplyForce()
 							ply:ChatPrint((org.last_heartbeat + 180) < CurTime() and "The body has been here for awhile." or "The body is slightly warm")
 						end
 
-						if org.blood < 3500 then
-							//if org.blood < 1000 then
-								//ply:ChatPrint("The skin looks almost white.")
-							//else
-								ply:ChatPrint("The skin is pale.")
-							//end
+						if org.blood <501 then
+   							ply:ChatPrint("The skin is really white.")
+						elseif org.blood < 1000 then
+    						ply:ChatPrint("The skin is almost white.")
+						elseif org.blood < 3500 then
+    						ply:ChatPrint("The skin is pale.")
 						end
 
 						if org.bleed > 0 then
@@ -944,15 +944,15 @@ function SWEP:ApplyForce()
 
 						if (bone == "ValveBiped.Bip01_Head1") then
 							if (org.o2.curregen == 0 or not org.alive or org.holdingbreath) then
-								--ply:ChatPrint("Not breathing.")
+								ply:ChatPrint("Not breathing.")
 							else
-								--ply:ChatPrint("Breathing.")
+								ply:ChatPrint("Breathing.")
 							end
 
-							--ply:ChatPrint(org.otrub and "No reaction." or "Reaction present.")
+							ply:Notify(org.otrub and "They seem to have no reaction." or "Reaction present.", 5)
 
 							if org.isPly and not org.otrub then
-								org.owner:ChatPrint("You were checked for reaction.")
+								org.owner:Notify("You were checked for reaction.", 2)
 							end
 						end
 					end
@@ -1015,7 +1015,7 @@ function SWEP:ApplyForce()
 
 						phys:ApplyForceCenter(-vector_up * 6000)
 
-						--self.CarryEnt:EmitSound("physics/body/body_medium_impact_soft" .. tostring(math.random(7)) .. ".wav")
+						self.CarryEnt:EmitSound("physics/body/body_medium_impact_soft" .. tostring(math.random(7)) .. ".wav")
 					end
 				end
 			else
