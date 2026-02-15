@@ -563,14 +563,14 @@ hook.Add("Think", "Fake", function()
 				end
 			end
 
-			if org.stamina[1] < 2 then
-				ply.HandsStun = CurTime() + 2
+			--if org.stamina[1] < 2 then
+				--ply.HandsStun = CurTime() + 2
 				--ply:Notify(math.random(1,2) == 1 and "SHIT!" or "OH NOO!", 2, "ragdoll_fall", 0, nil, Color(255, 0, 0))
-			end
+			--end
 
-			if org.stamina[1] < 50 and (IsValid(ragdoll.ConsRH) or IsValid(ragdoll.ConsLH)) then
-				ply:Notify( math.random(1,2) == 1 and "I'm at my limits here!" or "I can't hold much longer...", 25, "ragdoll_almostfall", 0, nil, Color(200, 55, 55))
-			end
+			--if org.stamina[1] < 50 and (IsValid(ragdoll.ConsRH) or IsValid(ragdoll.ConsLH)) then
+				--ply:Notify( math.random(1,2) == 1 and "I'm at my limits here!" or "I can't hold much longer...", 25, "ragdoll_almostfall", 0, nil, Color(200, 55, 55))
+		--end
 
 			if ply:KeyDown(IN_SPEED) and org.canmove and !org.larmamputated and (!ply.HandsStun or ply.HandsStun < CurTime()) then
 				--and org.shock < fakeshockFall
