@@ -37,6 +37,37 @@ properties.Add( "notify", {
 	end 
 } )
 
+properties.Add( "class", {
+	MenuLabel = "Class", -- Name to display on the context menu
+	Order = 11, -- The order to display this property relative to other properties
+	MenuIcon = "icon16/note_add.png", -- The icon to display next to the property
+
+	Filter = check,
+	Action = function( self, ent ) -- The action to perform upon using the property ( Clientside )
+        Derma_StringRequest(
+            "Classify "..ent:GetPlayerName(), 
+            "Write a class name",
+            "",
+            function(text) 
+                self:MsgStart()
+                    net.WriteEntity( ent )
+                    net.WriteString( text )
+                self:MsgEnd()
+            end
+        )
+
+	end,
+	Receive = function( self, length, ply ) -- The action to perform upon using the property ( Serverside )
+		local ent = net.ReadEntity()
+        local text = net.ReadString()
+		--if ( !properties.CanBeTargeted( ent, ply ) ) then return end
+		if ( !self:Filter( ent, ply ) ) then return end
+        ent = hg.RagdollOwner( ent ) or ent
+
+		ent:SetPlayerClass( text )
+	end 
+} )
+
 properties.Add( "givegun", {
 	MenuLabel = "Give", -- Name to display on the context menu
 	Order = 2, -- The order to display this property relative to other properties
