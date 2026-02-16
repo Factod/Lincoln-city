@@ -119,14 +119,18 @@ local function PhysCallback( ent, data )
 	util.Decal("Blood",data.HitPos - data.HitNormal*1,data.HitPos + data.HitNormal*1,ent)
 end
 
-local grub = Model("models/grub_nugget_small.mdl")
+--ya sosal y sadsalata i on mne dal ganmena 5 raz podryad
 function SpawnMeatGore(mainent, pos, count, force)
-	--models/grub_nugget_small.mdl
+	--models/mosi/fnv/props/gore/gorehead02.mdl
+	--models/mosi/fnv/props/gore/gorehead03.mdl
+	--models/mosi/fnv/props/gore/gorehead04.mdl
+	--models/mosi/fnv/props/gore/gorehead05.mdl
+	--models/mosi/fnv/props/gore/gorehead06.mdl
+	for i = 2, 6 do
 	force = force or Vector(0,0,0)
-	for i = 1, (count or math.random(8, 10)) do
 		local ent = ents_Create("prop_physics")
-		ent:SetModel(grub)
-		ent:SetSubMaterial(0,"models/flesh")
+		local giblets = "models/mosi/fnv/props/gore/gorehead0" .. i .. ".mdl"
+		ent:SetModel(Model(giblets))
 		ent:SetPos(pos)
 		ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 		ent:SetModelScale(math.Rand(0.8,1.1))
@@ -214,7 +218,6 @@ function Gib_Input(rag, bone, force)
 
 		rag.noHead = true
 		rag:SetNWString("PlayerName", "Beheaded body")
-
 		net.Start("addfountain")
 		net.WriteEntity(rag)
 		net.WriteVector(force or vector_origin)
