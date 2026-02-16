@@ -562,7 +562,8 @@ hook.Add("Think", "Fake", function()
 					end
 				end
 			end
-
+-- Little furry boy art rll just commented the code :3
+				
 			--if org.stamina[1] < 2 then
 				--ply.HandsStun = CurTime() + 2
 				--ply:Notify(math.random(1,2) == 1 and "SHIT!" or "OH NOO!", 2, "ragdoll_fall", 0, nil, Color(255, 0, 0))
