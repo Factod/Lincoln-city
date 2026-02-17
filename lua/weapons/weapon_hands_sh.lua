@@ -1206,6 +1206,13 @@ function SWEP:Think()
 		self.Instructions = "LMB - raise paws\nRELOAD - lower paws\n\nIn the raised state:\nLMB - strike\nRMB - block\n\n<color=91,121,229>As a bearer of a pathowogen infection, you have new abilities.\n\nIn lowered state, hold RMB to grab uninfected prey, then hold LMB to assimilate them.\n\nYou can press LMB to lick your fellow mates, doing so helps them alleviate their pain.\n\n:3<color=180,180,180>"
 		self.handsDesc = "furry"
 		self.InfoMarkup = nil
+	--I LOVE TWINKEYS!!! I LOVE ZINGERS!!! I LOVE FURRYS--- who said that #Noticing	
+	elseif owner.PlayerClassName == "meow" and self.handsDesc != "meow" then
+		self.PrintName = "Paws"
+		self.WepSelectIcon = paw
+		self.Instructions = "LMB - raise paws\nRELOAD - lower paws\n\nIn the raised state:\nLMB - strike\nRMB - block\n\n<color=91,121,229>As a furry :3 , you have new abilities\n\nYou can press LMB to lick your fellow mates, doing so helps them alleviate their pain.\n\n:3<color=180,180,180>"
+		self.handsDesc = "meow"
+		self.InfoMarkup = nil
 	elseif self.handsDesc != "default" then
 		self.PrintName = "Hands"
 		self.handsDesc = "default"
