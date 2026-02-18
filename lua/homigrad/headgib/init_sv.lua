@@ -65,52 +65,8 @@ local validHitGroup = {
 
 local Rand = math.Rand
 
-local validBone = {
-	["ValveBiped.Bip01_R_UpperArm"] = true,
-	["ValveBiped.Bip01_R_Forearm"] = true ,
-	["ValveBiped.Bip01_R_Hand"] = true,
-	["ValveBiped.Bip01_L_UpperArm"] = true,
-	["ValveBiped.Bip01_L_Forearm"] = true,
-	["ValveBiped.Bip01_L_Hand"] = true,
-
-	["ValveBiped.Bip01_L_Thigh"] = true,
-	["ValveBiped.Bip01_L_Calf"] = true,
-	["ValveBiped.Bip01_L_Foot"] = true,
-	["ValveBiped.Bip01_R_Thigh"] = true,
-	["ValveBiped.Bip01_R_Calf"] = true,
-	["ValveBiped.Bip01_R_Foot"] = true
-}
-
 local VectorRand, ents_Create = VectorRand, ents.Create
-function SpawnGore(ent, pos, headpos)
-	if ent.gibRemove and not ent.gibRemove[ent:TranslateBoneToPhysBone(ent:LookupBone("ValveBiped.Bip01_Head1"))] then
-		local ent = ents_Create("prop_physics")
-		ent:SetModel("models/Gibs/HGIBS.mdl")
-		ent:SetPos(headpos or pos)
-		ent:SetVelocity(VectorRand(-100, 100))
-		ent:Spawn()
-	end
 
-	for i = 1, 2 do
-		local ent = ents_Create("prop_physics")
-		ent:SetModel("models/Gibs/HGIBS_spine.mdl")
-		ent:SetPos(pos)
-		ent:SetVelocity(VectorRand(-100, 100))
-		ent:Spawn()
-		
-		local ent = ents_Create("prop_physics")
-		ent:SetModel("models/Gibs/HGIBS_scapula.mdl")
-		ent:SetPos(pos)
-		ent:SetVelocity(VectorRand(-100, 100))
-		ent:Spawn()
-
-		local ent = ents_Create("prop_physics")
-		ent:SetModel("models/Gibs/HGIBS_rib.mdl")
-		ent:SetPos(pos)
-		ent:SetVelocity(VectorRand(-100, 100))
-		ent:Spawn()
-	end
-end
 
 local function PhysCallback( ent, data )
 	--data.HitPos -- data.HitNormal
@@ -163,7 +119,6 @@ function SpawnMeatGore(mainent, pos, count, force)
 		ent:SetPos(pos)
 		ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 		ent:SetModelScale(math.Rand(1,3))
-		ent:SetAngles(AngleRand(-180,180))
 		ent:Activate()
 		ent:Spawn()
 		local phys = ent:GetPhysicsObject()
