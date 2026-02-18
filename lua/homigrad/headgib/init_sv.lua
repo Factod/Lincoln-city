@@ -119,21 +119,50 @@ local function PhysCallback( ent, data )
 	util.Decal("Blood",data.HitPos - data.HitNormal*1,data.HitPos + data.HitNormal*1,ent)
 end
 
---ya sosal y sadsalata i on mne dal ganmena 5 raz podryad
-function SpawnMeatGore(mainent, pos, count, force)
+--ya sosal y sadsalata i on mne dal ganmena 5 raz podryad //art was here :3\\
+
+function SpawnHeadGiblets(mainent, pos, count, force)
 	--models/mosi/fnv/props/gore/gorehead02.mdl
 	--models/mosi/fnv/props/gore/gorehead03.mdl
 	--models/mosi/fnv/props/gore/gorehead04.mdl
 	--models/mosi/fnv/props/gore/gorehead05.mdl
 	--models/mosi/fnv/props/gore/gorehead06.mdl
-	for i = 2, 6 do
+for i = 2, 6 do
 	force = force or Vector(0,0,0)
 		local ent = ents_Create("prop_physics")
-		local giblets = "models/mosi/fnv/props/gore/gorehead0" .. i .. ".mdl"
+		local giblets
+		giblets = "models/mosi/fnv/props/gore/gorehead0" .. i .. ".mdl"
 		ent:SetModel(Model(giblets))
 		ent:SetPos(pos)
 		ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
 		ent:SetModelScale(math.Rand(0.8,1.1))
+		if ent:GetModel("models/mosi/fnv/props/gore/gorehead05.mdl") then
+			ent:SetModelScale(0.8)
+		end
+		ent:Activate()
+		ent:Spawn()
+		local phys = ent:GetPhysicsObject()
+		if IsValid(phys) then
+			phys:SetVelocity(mainent:GetVelocity() + VectorRand(-65,65) + force / 10)
+			phys:AddAngleVelocity(VectorRand(-65,65))
+		end
+
+		ent:AddCallback( "PhysicsCollide", PhysCallback )
+	end
+end
+
+function SpawnMeatGore(mainent, pos, count, force)
+	for i = 1, math.random(6, 12) do
+	force = force or Vector(0,0,0)
+		local ent = ents_Create("prop_physics")
+		local giblets
+		for i = 1, 3 do
+		giblets = "models/mosi/fnv/props/gore/meatbit0" .. i .. ".mdl"
+		end
+		ent:SetModel(Model(giblets))
+		ent:SetPos(pos)
+		ent:SetCollisionGroup(COLLISION_GROUP_DEBRIS)
+		ent:SetModelScale(math.Rand(1,3))
 		ent:SetAngles(AngleRand(-180,180))
 		ent:Activate()
 		ent:Spawn()
@@ -202,8 +231,8 @@ function Gib_Input(rag, bone, force)
 		ent:SetParent(rag, 3)--rag:LookupBone("ValveBiped.Bip01_Head1"))
 		ent:Spawn()
 
-		SpawnMeatGore(ent, pos, nil, force) --модельки поменять и будет эпик
-
+		--SpawnMeatGore(ent, pos, nil, force) --модельки поменять и будет эпик
+		SpawnHeadGiblets(ent, pos, nil, force)
 		local armors = rag:GetNetVar("Armor",{})
 
 		if armors["head"] and !hg.armor["head"][armors["head"]].nodrop then
