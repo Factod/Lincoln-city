@@ -1,4 +1,4 @@
--- люблю милых котиков!!!!!!!!!!
+-- люблю милых котиков!!!!!!!!!! я тоже
 local fur_pain = {
     "zbattle/furry/exp5.wav", "zbattle/furry/exp6.wav", "zbattle/furry/exp7.wav",
     "zbattle/furry/exp8.wav", "zbattle/furry/exp9.wav", "zbattle/furry/exp10.wav",
@@ -8,7 +8,7 @@ local fur_pain = {
     "zbattle/furry/death4.wav", "zbattle/furry/death5.wav",
 }
 
--- звуков протогенов ЛОГИЧНО нету, я же не тупой еблон
+-- звуков протогенов ЛОГИЧНО нету, я же не тупой еблон <- запомните его слова -art
 local uwuspeak_phrases = {
     "zbattle/furry/cat_mrrp1.ogg", "zbattle/furry/cat_mrrp1.ogg",
     "zbattle/furry/cat_purr1.ogg", "zbattle/furry/cat_purr2.ogg",
@@ -32,9 +32,18 @@ function CLASS.On(self)
     
     -- рот ипал суко, шляпы и боди группы не убераються :steamsad:
     ApplyAppearance(self, nil, nil, nil, true)
+
+    --ну ты и еблан вот тебе
+    local Appearance = self.CurAppearance or hg.Appearance.GetRandomAppearance()
+    Appearance.AAttachments = ""
+    Appearance.AColthes = ""
+    self:SetNetVar("Accessories", "")
+
+	self.CurAppearance = Appearance
     
     self:SetModel("models/keith3201/ligeia/ligeia_pm.mdl")
-    self:SetBodyGroups("000000000")
+    self:SetBodyGroups("0000")
+    self:SetSkin(math.random(0,10))
     -- хотябы это норм работает
     self:SetSubMaterial()
 
